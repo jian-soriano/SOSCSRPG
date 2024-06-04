@@ -13,7 +13,7 @@ namespace Engine.Models
 
         // properties
         public string Name { get; set; }
-        public string Class {  get; set; }
+        public string CharacterClass {  get; set; }
         public int HitPoints {  get; set; }
         public int ExperiencePoints { get; set; }
         public int Level { get; set; }
