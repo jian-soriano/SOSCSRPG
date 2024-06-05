@@ -8,6 +8,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+// allows MainWindow.xaml.cs to use GameSession objects
 using Engine.ViewModels;
 
 namespace WPFUI
@@ -21,11 +22,18 @@ namespace WPFUI
 
         public MainWindow()
         {
+            // draws the screen and other objects (grids, labels, etc.)
             InitializeComponent();
 
             _gameSession = new GameSession();
 
+            // allows MainWindow.xaml to access _gameSession values
             DataContext = _gameSession;
+        }
+        // adds 10 to CurrentPlayer's ExperiencePoints property
+        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+        {
+            _gameSession.CurrentPlayer.ExperiencePoints = _gameSession.CurrentPlayer.ExperiencePoints + 10;
         }
     }
 }

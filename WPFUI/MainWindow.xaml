@@ -6,10 +6,15 @@
         xmlns:local="clr-namespace:WPFUI"
         mc:Ignorable="d"
         Title="The Game" Height="768" Width="1024">
+    <!-- sets the title and dimensions of the window -->
+    
     <Grid>
         <Grid.RowDefinitions>
+            <!-- sets the first row's height to match the contents inside -->
             <RowDefinition Height="Auto"></RowDefinition>
+            <!-- sets the second row's height to fill whatever space remains -->
             <RowDefinition Height="*"></RowDefinition>
+            <!-- sets the third row's height to exactly 225 pixels -->
             <RowDefinition Height="225"></RowDefinition>
         </Grid.RowDefinitions>
         
@@ -36,6 +41,7 @@
             </Grid.ColumnDefinitions>
 
             <Label Grid.Row="0" Grid.Column="0" Content="Name:"/>
+            <!-- Binding pulls values from the set DataContext -->
             <Label Grid.Row="0" Grid.Column="1" Content="{Binding CurrentPlayer.Name}"/>
             <Label Grid.Row="1" Grid.Column="0" Content="Class:"/>
             <Label Grid.Row="1" Grid.Column="1" Content="{Binding CurrentPlayer.CharacterClass}"/>
@@ -47,6 +53,8 @@
             <Label Grid.Row="4" Grid.Column="1" Content="{Binding CurrentPlayer.ExperiencePoints}"/>
             <Label Grid.Row="5" Grid.Column="0" Content="Level:"/>
             <Label Grid.Row="5" Grid.Column="1" Content="{Binding CurrentPlayer.Level}"/>
+            <!-- button that calls ButtonBase_OnClick method when clicked -->
+            <Button Grid.Row="6" Grid.Column="1" Content="Add XP" Click="ButtonBase_OnClick"/>
         </Grid>
         <Label Grid.Row="1" Grid.Column="1" Content="Game Data" Background="Beige"></Label>
         <Label Grid.Row="2" Grid.Column="0" Content="Inventory/Quests" Background="BurlyWood"></Label>
