@@ -27,4 +27,12 @@
     </None>
   </ItemGroup>
 
+  <ItemGroup>
+    <EditorConfigFiles Remove="C:\Users\jsori\source\repos\SOSCSRPG\WPFUI\.editorconfig" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="C:\Users\jsori\source\repos\SOSCSRPG\WPFUI\.editorconfig" />
+  </ItemGroup>
+
 </Project>
