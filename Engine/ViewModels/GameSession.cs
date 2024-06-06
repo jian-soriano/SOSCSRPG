@@ -69,17 +69,18 @@ namespace Engine.ViewModels
         public GameSession()
         {
             // sets the starting player values
-            CurrentPlayer = new Player();
-            CurrentPlayer.Name = "Jian";
-            CurrentPlayer.CharacterClass = "Fighter";
-            CurrentPlayer.HitPoints = 10;
-            CurrentPlayer.Gold = 1000000;
-            CurrentPlayer.ExperiencePoints = 0;
-            CurrentPlayer.Level = 1;
+            CurrentPlayer = new Player
+            {
+                Name = "Jian",
+                CharacterClass = "Fighter",
+                HitPoints = 10,
+                Gold = 1000000,
+                ExperiencePoints = 10,
+                Level = 1
+            };
 
             // generates the game world
-            WorldFactory factory = new WorldFactory();
-            CurrentWorld = factory.CreateWorld();
+            CurrentWorld = WorldFactory.CreateWorld();
 
             // sets the starting location as Home
             CurrentLocation = CurrentWorld.LocationAt(0, -1);
