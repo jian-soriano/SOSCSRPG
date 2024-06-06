@@ -9,7 +9,12 @@
         Title="The Game" Height="768" Width="1024">
     <!-- sets the global font size to 11pt -->
     <!-- sets the title and dimensions of the window -->
-    
+
+    <!-- added built-in function that affects Button visibility based on boolean values -->
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibility"/>
+    </Window.Resources>
+
     <Grid>
         <Grid.RowDefinitions>
             <!-- sets the first row's height to match the contents inside -->
@@ -25,8 +30,10 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
+        <!-- MENU BAR -->
         <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Content="Menu" Background="AliceBlue"></Label>
-        <!-- <Label Grid.Row="1" Grid.Column="0" Content="Player Data" Background="Aquamarine"></Label> -->
+        
+        <!-- PLAYER DATA GRID -->
         <Grid Grid.Row="1" Grid.Column="0" Background="Aquamarine">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
@@ -56,14 +63,16 @@
             <Label Grid.Row="5" Grid.Column="0" Content="Level:"/>
             <Label Grid.Row="5" Grid.Column="1" Content="{Binding CurrentPlayer.Level}"/>
             <!-- button that calls ButtonBase_OnClick method when clicked -->
-            <Button Grid.Row="6" Grid.Column="1" Content="Add XP" Click="ButtonBase_OnClick"/>
+            <!-- <Button Grid.Row="6" Grid.Column="1" Content="Add XP" Click="ButtonBase_OnClick"/> -->
         </Grid>
-        <!-- <Label Grid.Row="1" Grid.Column="1" Content="Game Data" Background="Beige"></Label> -->
+        
+        <!-- GAME DATA GRID -->
         <Grid Grid.Row="1" Grid.Column="1" Background="Beige">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
+            
             <Grid.ColumnDefinitions>
                 <!-- first column gets 3/5 of the remaining space -->
                 <ColumnDefinition Width="3*"/>
@@ -72,7 +81,9 @@
             </Grid.ColumnDefinitions>
 
             <!-- creates a border around the top-right quadrant of the grid -->
-            <Border Grid.Row="0" Grid.Column="1" BorderBrush="Gainsboro" BorderThickness="1">
+            <Border Grid.Row="0" Grid.Column="1" 
+                    BorderBrush="Gainsboro" 
+                    BorderThickness="1">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
@@ -81,16 +92,69 @@
                     </Grid.RowDefinitions>
 
                     <!-- displays CurrentLocation.Name in the top row-->
-                    <TextBlock Grid.Row="0" HorizontalAlignment="Center" Text="{Binding CurrentLocation.Name}"/>
+                    <TextBlock Grid.Row="0" 
+                               HorizontalAlignment="Center" 
+                               Text="{Binding CurrentLocation.Name}"/>
                     <!-- displays CurrentLocation image in the middle row-->
-                    <Image Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Height="125" Width="125" Source="{Binding CurrentLocation.ImageName}"/>
+                    <Image Grid.Row="1" 
+                           HorizontalAlignment="Center" VerticalAlignment="Center" 
+                           Height="125" Width="125" 
+                           Source="{Binding CurrentLocation.ImageName}"/>
                     <!-- displays CurrentLocation.Description in the bottom row -->
-                    <TextBlock Grid.Row="2" HorizontalAlignment="Center" Text="{Binding CurrentLocation.Description}"/>
+                    <TextBlock Grid.Row="2" 
+                               HorizontalAlignment="Center" 
+                               Text="{Binding CurrentLocation.Description}"
+                               TextWrapping="Wrap"/>
                 </Grid>
             </Border>
         </Grid>
+       
         <Label Grid.Row="2" Grid.Column="0" Content="Inventory/Quests" Background="BurlyWood"></Label>
-        <Label Grid.Row="2" Grid.Column="1" Content="Combat/Movement Controls" Background="Lavender"></Label>
+        
+        <!-- COMBAT/MOVEMENT GRID -->
+        <Grid Grid.Row="2" Grid.Column="1" Background="Lavender">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="255"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- MOVEMENT CONTROLS GRID -->
+            <Grid Grid.Row="0" Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- navigation buttons, visibility bound to HasLocation boolean values in GameSession.cs-->
+                <Button Grid.Row="0" Grid.Column="1"
+                        Height="25" Width="65" Margin="10" 
+                        Visibility="{Binding HasLocationToNorth, Converter={StaticResource BooleanToVisibility}}"
+                        Content="North"
+                        Click="OnClick_MoveNorth"/>
+                <Button Grid.Row="1" Grid.Column="0"
+                        Height="25" Width="65" Margin="10" 
+                        Visibility="{Binding HasLocationToWest, Converter={StaticResource BooleanToVisibility}}"
+                        Content="West"
+                        Click="OnClick_MoveWest"/>
+                <Button Grid.Row="1" Grid.Column="2"
+                        Height="25" Width="65" Margin="10" 
+                        Visibility="{Binding HasLocationToEast, Converter={StaticResource BooleanToVisibility}}"
+                        Content="East"
+                        Click="OnClick_MoveEast"/>
+                <Button Grid.Row="2" Grid.Column="1"
+                        Height="25" Width="65" Margin="10" 
+                        Visibility="{Binding HasLocationToSouth, Converter={StaticResource BooleanToVisibility}}"
+                        Content="South"
+                        Click="OnClick_MoveSouth"/>
+            </Grid>
+        </Grid>
 
     </Grid>
 </Window>
