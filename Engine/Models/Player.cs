@@ -9,7 +9,7 @@ namespace Engine.Models
 {
     public class Player : BaseNotificationClass
     {
-        // fields
+        // FIELDS
         private string _name;
         private string _characterClass;
         private int _hitPoints;
@@ -17,9 +17,7 @@ namespace Engine.Models
         private int _level;
         private int _gold;
 
-        // constructors
-
-        // properties
+        // PROPERTIES
         public string Name
         { 
             get { return _name; }
