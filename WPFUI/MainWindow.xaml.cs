@@ -18,8 +18,10 @@ namespace WPFUI
     /// </summary>
     public partial class MainWindow : Window
     {
+        // FIELDS
         private GameSession _gameSession;
 
+        // CONSTRUCTOR
         public MainWindow()
         {
             // draws the screen and other objects (grids, labels, etc.)
@@ -30,10 +32,28 @@ namespace WPFUI
             // allows MainWindow.xaml to access _gameSession values
             DataContext = _gameSession;
         }
-        // adds 10 to CurrentPlayer's ExperiencePoints property
-        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+        
+        // METHODS
+
+        // private because it's only used by the MainWindow
+        private void OnClick_MoveNorth(object sender, RoutedEventArgs e) 
         {
-            _gameSession.CurrentPlayer.ExperiencePoints = _gameSession.CurrentPlayer.ExperiencePoints + 10;
+            _gameSession.MoveNorth();
+        }
+
+        private void OnClick_MoveWest(object sender, RoutedEventArgs e)
+        {
+            _gameSession.MoveWest();
+        }
+
+        private void OnClick_MoveEast(object sender, RoutedEventArgs e)
+        {
+            _gameSession.MoveEast();
+        }
+
+        private void OnClick_MoveSouth(object sender, RoutedEventArgs e)
+        {
+            _gameSession.MoveSouth();
         }
     }
 }
