@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -19,7 +20,7 @@ namespace Engine.Models
 
         // PROPERTIES
         public string Name
-        { 
+        {
             get { return _name; }
             set
             {
@@ -27,8 +28,8 @@ namespace Engine.Models
                 OnPropertyChanged(nameof(Name));
             }
         }
-        public string CharacterClass {  
-            get { return _characterClass; } 
+        public string CharacterClass {
+            get { return _characterClass; }
             set
             {
                 _characterClass = value;
@@ -36,7 +37,7 @@ namespace Engine.Models
             }
         }
         public int HitPoints
-        {  
+        {
             get { return _hitPoints; }
             set
             {
@@ -47,13 +48,13 @@ namespace Engine.Models
         public int ExperiencePoints
         {
             get { return _experiencePoints; }
-            set 
+            set
             {
                 _experiencePoints = value;
                 OnPropertyChanged(nameof(ExperiencePoints));
             }
         }
-        public int Level 
+        public int Level
         {
             get { return _level; }
             set
@@ -71,6 +72,16 @@ namespace Engine.Models
                 OnPropertyChanged(nameof(Gold));
             }
         }
+
+        public ObservableCollection<GameItem> Inventory { get; set; }
+
+        // CONSTRUCTOR
+
+        public Player()
+        {
+            Inventory = new ObservableCollection<GameItem>();
+        }
+
 
     }
 }
