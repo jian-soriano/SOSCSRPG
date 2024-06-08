@@ -111,6 +111,7 @@
        
         <!-- INVENTORY/QUESTS -->
         <Grid Grid.Row="2" Grid.Column="0" Background="BurlyWood">
+            <!-- used to switch between Inventory and Quests view -->
             <TabControl>
                 <TabItem Header="Inventory">
                     <DataGrid ItemsSource="{Binding CurrentPlayer.Inventory}"
@@ -124,7 +125,6 @@
                                                 Binding="{Binding Price}"
                                                 Width="Auto"/>
                         </DataGrid.Columns>
-                        
                     </DataGrid>
                 </TabItem>
             </TabControl>
