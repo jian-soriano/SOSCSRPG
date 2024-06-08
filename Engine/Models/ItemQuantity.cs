@@ -6,7 +6,19 @@ using System.Threading.Tasks;
 
 namespace Engine.Models
 {
-    internal class ItemQuantity
+    public class ItemQuantity
     {
+        // PROPERTIES
+
+        public int ItemID { get; set; }
+        public int Quantity { get; set; }
+
+        // CONSTRUCTOR
+        
+        public ItemQuantity(int itemID, int quantity)
+        {
+            ItemID = itemID;
+            Quantity = quantity;
+        }
     }
 }
