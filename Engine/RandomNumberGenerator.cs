@@ -16,20 +16,22 @@ namespace Engine
 
         public static int NumberBetween(int minimumValue, int maximumValue)
         {
+            // creates array of bytes
             byte[] randomNumber = new byte[1];
 
+            // populates each index of the array with a random byte value (max value = 255)
             _generator.GetBytes(randomNumber);
 
+            // converts the first index of the byte array to a double (max value = 255)
             double asciiValueOfRandomCharacter = Convert.ToDouble(randomNumber[0]);
 
-            // We are using Math.Max, and subtracting 0.00000000001,
-            // to ensure "multiplier" will always be between 0.0 and .99999999999
-            // Otherwise, it's possible for it to be "1", which causes problems in our rounding.
-            double multiplier = Math.Max(0, (asciiValueOfRandomCharacter / 255d) - 0.00000000001d);
+            // converts random number to a fraction multiplier between 0 a 1
+            double multiplier = asciiValueOfRandomCharacter / 255d;
 
-            // We need to add one to the range, to allow for the rounding done with Math.Floor
-            int range = maximumValue - minimumValue + 1;
+            // gets the range of desired values
+            int range = maximumValue - minimumValue;
 
+            // apply the fraction multiplier to our valid range, and round down to the nearest whole number
             double randomValueInRange = Math.Floor(multiplier * range);
 
             return (int) (minimumValue + randomValueInRange);
