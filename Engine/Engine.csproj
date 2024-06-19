@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -16,6 +16,9 @@
     <None Remove="Images\Locations\TownGate.png" />
     <None Remove="Images\Locations\TownSquare.png" />
     <None Remove="Images\Locations\Trader.png" />
+    <None Remove="Images\Monsters\GiantSpider.png" />
+    <None Remove="Images\Monsters\Rat.png" />
+    <None Remove="Images\Monsters\Snake.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -28,6 +31,9 @@
     <Resource Include="Images\Locations\TownGate.png" />
     <Resource Include="Images\Locations\TownSquare.png" />
     <Resource Include="Images\Locations\Trader.png" />
+    <Resource Include="Images\Monsters\GiantSpider.png" />
+    <Resource Include="Images\Monsters\Rat.png" />
+    <Resource Include="Images\Monsters\Snake.png" />
   </ItemGroup>
 
   <ItemGroup>
