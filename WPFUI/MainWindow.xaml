@@ -3,12 +3,16 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:viewModels="clr-namespace:Engine.ViewModels;assembly=Engine"
         xmlns:local="clr-namespace:WPFUI"
+        d:DataContext="{d:DesignInstance viewModels:GameSession}"
         mc:Ignorable="d"
         FontSize="11pt"
         Title="The Game" Height="768" Width="1024">
-    <!-- sets the global font size to 11pt -->
-    <!-- sets the title and dimensions of the window -->
+    <!-- xmlns:viewModels sets a namespace indicating that we're using objects from ViewModels in the Engine assembly -->
+    <!-- d:DataContext sets the GameSession object from the viewModels namespace as the DataContext (for Intellisense) -->
+    <!-- FontSize sets the global font size to 11pt -->
+    <!-- Title sets the title and dimensions of the window -->
 
     <!-- added built-in function that affects Button visibility based on boolean values -->
     <Window.Resources>
@@ -80,6 +84,7 @@
                 <ColumnDefinition Width="2*"/>
             </Grid.ColumnDefinitions>
 
+            <!-- LOCATION INFORMATION -->
             <!-- creates a border around the top-right quadrant of the grid -->
             <Border Grid.Row="0" Grid.Column="1" 
                     BorderBrush="Gainsboro" 
@@ -106,6 +111,39 @@
                                Text="{Binding CurrentLocation.Description}"
                                TextWrapping="Wrap"/>
                 </Grid>
+            </Border>
+            
+            <!-- MONSTER INFORMATION -->
+            <Border Grid.Row="1" Grid.Column="1"
+                    BorderBrush="Gainsboro"
+                    BorderThickness="1">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0"
+                               HorizontalAlignment="Center"
+                               Height="Auto"
+                               Text="{Binding CurrentMonster.Name}"/>
+
+                    <Image Grid.Row="1"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           Height="125"
+                           Width="125"
+                           Source="{Binding CurrentMonster.ImageName}"/>
+
+                    <StackPanel Grid.Row="2"
+                                Visibility="{Binding HasMonster, Converter={StaticResource BooleanToVisibility}}"
+                                HorizontalAlignment="Center"
+                                Orientation="Horizontal">
+                        <TextBlock>Current Hit Points: </TextBlock>
+                        <TextBlock Text="{Binding CurrentMonster.HitPoints}"/>
+                    </StackPanel>
+                </Grid> 
             </Border>
         </Grid>
        
@@ -142,14 +180,6 @@
                     </DataGrid>
                 </TabItem>
             </TabControl>
-            
-            <Grid.RowDefinitions>
-                
-            </Grid.RowDefinitions>
-
-            <Grid.ColumnDefinitions>
-                
-            </Grid.ColumnDefinitions>
         </Grid>
         
         <!-- COMBAT/MOVEMENT GRID -->
