@@ -13,11 +13,13 @@ namespace Engine.ViewModels
     {
         // FIELDS
         private Location _currentLocation;
-        
+        private Monster _currentMonster;
+
         // PROPERTIES
-        public Player CurrentPlayer {  get; set; }
-        public Location CurrentLocation 
-        { 
+        public World CurrentWorld { get; set; }
+        public Player CurrentPlayer { get; set; }
+        public Location CurrentLocation
+        {
             get { return _currentLocation; }
             set
             {
@@ -30,9 +32,21 @@ namespace Engine.ViewModels
                 OnPropertyChanged(nameof(HasLocationToSouth));
 
                 GivePlayerQuestsAtLocation();
+                GetMonsterAtLocation();
             }
         }
-        public World CurrentWorld { get; set; }
+
+        public Monster CurrentMonster
+        {
+            get { return _currentMonster; }
+            set
+            {
+                _currentMonster = value;
+
+                OnPropertyChanged(nameof(CurrentMonster));
+                OnPropertyChanged(nameof(HasMonster));
+            }
+        }
         
         // these bools will set visibility of nav buttons to Visible/Hidden if returns true/false
         public bool HasLocationToNorth
@@ -66,6 +80,8 @@ namespace Engine.ViewModels
                 return CurrentWorld.LocationAt(CurrentLocation.XCoordinate, CurrentLocation.YCoordinate - 1) != null;
             }
         }
+
+        public bool HasMonster => CurrentMonster != null;
 
         // CONSTRUCTOR
         public GameSession()
@@ -132,6 +148,11 @@ namespace Engine.ViewModels
                     CurrentPlayer.Quests.Add(new QuestStatus(quest));
                 }
             }
+        }
+
+        private void GetMonsterAtLocation()
+        {
+            CurrentMonster = CurrentLocation.GetMonster();
         }
 
     }
